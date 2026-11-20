@@ -1,0 +1,8 @@
+{
+  "name": "lively-hat-6002",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-20",
+  "kv_namespaces": [
+    { "binding": "DB", "id": "fa30422c01ab462c83530ec447026682" }
+  ]
+}
