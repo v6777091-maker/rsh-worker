@@ -56,6 +56,20 @@ export default {
       if (request.headers.get('X-Telegram-Bot-Api-Secret-Token') !== env.WEBHOOK_SECRET)
         return new Response('forbidden', { status: 403 });
       const u = await request.json();
+
+      const m = u.message;
+      if (m && m.text && m.text.startsWith('/start')) {
+        await tg(env, 'sendMessage', {
+          chat_id: m.chat.id,
+          text: 'Привет! Залетай в RSH CASH — открывай кейсы и собирай коллекцию.',
+          reply_markup: {
+            inline_keyboard: [[
+              { text: '🚀 Играть в RSH CASH', web_app: { url: 'https://v6777091-maker.github.io/RSH-cash/' } }
+            ]]
+          }
+        });
+      }
+
       if (u.pre_checkout_query) {
         await tg(env, 'answerPreCheckoutQuery', {
           pre_checkout_query_id: u.pre_checkout_query.id,
